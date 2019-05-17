@@ -28,17 +28,6 @@ const app = {
     this.reloadListTask()
   },
 
-  sendNewTask: function() {
-    event.preventDefault()
-    let titleTask = document.getElementById("title-task").value;
-    let dueDateTask = document.getElementById("due-date-task").value;
-    let dataTask = {
-      title: titleTask,
-      dueDate: dueDateTask
-    }
-    app.addTask(dataTask);
-  },
-
   reloadListTask: function() {},
 
   toggleState: function() {},
@@ -55,15 +44,8 @@ const app = {
 
   run: function () {
     this.idIterator = this.idGenerator()
-    const $buttonSave = document.getElementById("send-new-task")
-    $buttonSave.addEventListener("click", app.sendNewTask )
   }
 
 }
-
-
-
-
-
 
 app.run()
