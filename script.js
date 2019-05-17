@@ -66,7 +66,8 @@ const app = {
 
   parseTaskToReload: function(objTask) {
     let result = Object.values(objTask);
-    this.reloadListTask(result);
+    resultSorted = this.orderbyTaskTitleDesc(result);
+    this.reloadListTask(resultSorted);
   },
 
   reloadListTask: function(arrayTask) {
@@ -81,8 +82,20 @@ const app = {
   },
 
   toggleState: function() {},
+  compare: function(a,b) {
+    if (a.title < b.title){
+      return -1;
+    }
+    if (a.title > b.title){
+      return 1;
+    }
+    return 0;
+  },
 
-  orderby: function() {},
+  orderbyTaskTitleDesc: function(arrayTask) {
+    const arraySorted = arrayTask.sort(this.compare);
+    return arraySorted;
+  },
 
   idGenerator: function*() {
     let id = 1;
