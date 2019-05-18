@@ -77,7 +77,7 @@ const app = {
     arrayTask.forEach(function(val) {
       htmlTasks += `<li class="task-item ${val.resolved ? "active" : ""}"> ${
         val.title
-      }</li>`;
+      }, ${val.dueDate}</li>`;
     });
     $taskList.innerHTML = htmlTasks;
   },
@@ -93,9 +93,27 @@ const app = {
     return 0;
   },
 
+  compareDesc: function(a,b) {
+    if (a.title < b.title){
+      return 1;
+    }
+    if (a.title > b.title){
+      return -1;
+    }
+    return 0;
+  },
+
+  compareDateAsc: function(a,b){
+    return new Date(a.dueDate) - new Date(b.dueDate);
+  },
+
+
   getSelectedValue: function() {
     var selectedValue = document.getElementById("select_id").value;
     console.log(selectedValue);
+    if (selectedValue == "Title-Asc") { this.orderbyTaskTitleAsc(); }
+    if (selectedValue == "Title-Desc") { this.orderbyTaskTitleDesc(); }
+    if (selectedValue == "Due-Date-Asc") { this.orderbyDueDateAsc(); }
   },
 
   orderbyTaskTitleAsc: function() {
@@ -103,6 +121,22 @@ const app = {
     const arraySorted = arrayTask.sort(this.compare);
     this.reloadListTask(arraySorted);
   },
+
+  orderbyTaskTitleDesc: function() {
+    let arrayTask = Object.values(this.tasks);
+    const arraySorted = arrayTask.sort(this.compareDesc);
+    this.reloadListTask(arraySorted);
+  },
+
+  orderbyDueDateAsc: function() {
+    let arrayTask = Object.values(this.tasks);
+    const arraySorted = arrayTask.sort(this.compareDateAsc);
+    console.log(arraySorted)
+    this.reloadListTask(arraySorted);
+  },
+
+
+
 
 
   idGenerator: function*() {
