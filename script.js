@@ -32,7 +32,11 @@ const app = {
   changeState: function() {
     const idCurrentTask = this.dataset.idtask
     app.tasks[idCurrentTask].resolved = !app.tasks[idCurrentTask].resolved
-    app.reloadListTask(app.lastSort)
+    if ( app.lastSort.length ) {
+      app.reloadListTask(app.lastSort)
+    } else {
+      app.parseTaskToReload(app.tasks)
+    }
   },
 
   sendNewTask: function() {
@@ -54,7 +58,7 @@ const app = {
       $inputTitle.value = ""
       $inputDate.value = ""
     }
-    
+
   },
 
   parseTaskToReload: function(objTask) {
