@@ -1,0 +1,20 @@
+.button-float {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-float.-solid {
+  border-color: var(--c-primary);
+  background-color: var(--c-primary);
+}
+
+.button-float.-ghost {
+  border-color: var(--c-primary);
+  background-color: var(--color-white);
+}
