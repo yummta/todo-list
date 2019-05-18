@@ -1,0 +1,20 @@
+:root{
+  --c-primary: #0129ff;
+  --c-alert: #e3260d;
+  --c-gray-text: #898989;
+  --c-gray: #e1e1e1;
+}
+
+/* Resets */
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: white;
+  height: 100vh;
+  margin: 0;
+}
+
+ul{
+  padding: 0;
+  list-style-type: none;
+}
