@@ -1,4 +1,20 @@
-.button-float {
+.c-float-button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.c-float-button .label{
+  color: var(--c-gray-text);
+  font-size: 14px;
+}
+
+.c-float-button .button-float {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -7,14 +23,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  margin-bottom: 8px;
 }
 
-.button-float.-solid {
+.c-float-button .button-float.-solid {
   border-color: var(--c-primary);
   background-color: var(--c-primary);
 }
+.c-float-button .button-float.-solid svg{
+  fill: white
+}
 
-.button-float.-ghost {
+.c-float-button .button-float.-ghost {
   border-color: var(--c-primary);
   background-color: var(--color-white);
+}
+.c-float-button .button-float.-ghost svg {
+  fill: var(--c-primary);
+  transform: rotate(45deg)
 }

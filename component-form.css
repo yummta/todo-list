@@ -1,0 +1,42 @@
+.c-form{
+  padding: 32px;
+  border-radius: 20px 20px 0 0;
+  position: relative;
+  background-color: #fff;
+  height: 100vh;
+}
+.c-form:after{
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  top: 100%;
+  height: 40px;
+  left: 0;
+  right: 0;
+}
+
+
+.c-form .title{
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.c-form .inputs-block{
+  margin-bottom: 24px;
+}
+
+.c-form .input{
+  border-color: var(--c-gray);
+  margin-bottom: 16px;
+}
+
+input[type=date]:invalid::-webkit-datetime-edit {
+  color: var(--c-gray-text);
+}
+
+.c-form .input:focus{
+  border-color: var(--c-primary)
+}
