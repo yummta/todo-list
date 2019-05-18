@@ -39,13 +39,22 @@ const app = {
     event.preventDefault();
     const $inputTitle = document.getElementById("title-task")
     const $inputDate = document.getElementById("due-date-task")
-    let dataTask = {
-      title: $inputTitle.value,
-      dueDate: $inputDate.value
-    };
-    app.addTask(dataTask);
-    $inputTitle.value = ""
-    $inputDate.value = ""
+    if ($inputTitle.value === ""){
+      alert("Please enter a valid task 👀");
+      $inputTitle.focus();
+    } else if($inputDate.value === "") {
+      alert("Please enter a valid date 👀");
+      $inputDate.focus();
+    } else {
+      let dataTask = {
+        title: $inputTitle.value,
+        dueDate: $inputDate.value
+      };
+      app.addTask(dataTask);
+      $inputTitle.value = ""
+      $inputDate.value = ""
+    }
+    
   },
 
   parseTaskToReload: function(objTask) {
