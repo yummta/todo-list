@@ -75,9 +75,8 @@ const app = {
     const $taskList = document.getElementById("js-task-list");
     let htmlTasks = "";
     arrayTask.forEach(function(val) {
-      htmlTasks += `<li class="task-item ${val.resolved ? "active" : ""}"> ${
-        val.title
-      }, ${val.dueDate}</li>`;
+      htmlTasks += `<li class="task-item ${val.resolved ? "active" : ""}"> 
+      ${val.title}, ${val.dueDate}, ${val.createDate} </li>`;
     });
     $taskList.innerHTML = htmlTasks;
   },
@@ -107,6 +106,17 @@ const app = {
     return new Date(a.dueDate) - new Date(b.dueDate);
   },
 
+  compareDateDesc: function(a,b){
+    return new Date(b.dueDate) - new Date(a.dueDate);
+  },
+
+  compareCreateDateAsc: function(a,b){
+    return new Date(a.createDate) - new Date(b.createDate);
+  },
+
+  compareCreateDateDesc: function(a,b){
+    return new Date(b.createDate) - new Date(a.createDate);
+  },
 
   getSelectedValue: function() {
     var selectedValue = document.getElementById("select_id").value;
@@ -114,6 +124,9 @@ const app = {
     if (selectedValue == "Title-Asc") { this.orderbyTaskTitleAsc(); }
     if (selectedValue == "Title-Desc") { this.orderbyTaskTitleDesc(); }
     if (selectedValue == "Due-Date-Asc") { this.orderbyDueDateAsc(); }
+    if (selectedValue == "Due-Date-Desc") { this.orderbyDueDateDesc(); }
+    if (selectedValue == "Creation-Date-Asc") { this.orderbyCreateDateAsc(); }
+    if (selectedValue == "Creation-Date-Desc") { this.orderbyCreateDateDesc(); }
   },
 
   orderbyTaskTitleAsc: function() {
@@ -135,9 +148,26 @@ const app = {
     this.reloadListTask(arraySorted);
   },
 
+  orderbyDueDateDesc: function() {
+    let arrayTask = Object.values(this.tasks);
+    const arraySorted = arrayTask.sort(this.compareDateDesc);
+    console.log(arraySorted)
+    this.reloadListTask(arraySorted);
+  },
 
+  orderbyCreateDateAsc: function() {
+    let arrayTask = Object.values(this.tasks);
+    const arraySorted = arrayTask.sort(this.compareCreateDateAsc);
+    console.log(arraySorted)
+    this.reloadListTask(arraySorted);
+  },
 
-
+  orderbyCreateDateDesc: function() {
+    let arrayTask = Object.values(this.tasks);
+    const arraySorted = arrayTask.sort(this.compareCreateDateDesc);
+    console.log(arraySorted)
+    this.reloadListTask(arraySorted);
+  },
 
   idGenerator: function*() {
     let id = 1;
