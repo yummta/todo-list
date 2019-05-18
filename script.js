@@ -1,13 +1,3 @@
-// const tasks = document.getElementsByClassName("task-item")
-
-// function changeState() {
-//   this.classList.toggle("active")
-// }
-
-// for( let i = 0; i < tasks.length; i++){
-//   tasks[i].add-EventListener("click", changeState )
-// }
-
 const fakeTask = {
   1: {
     id: 1,
@@ -34,7 +24,6 @@ const fakeTask = {
     resolved: false
   }
 };
-
 
 const app = {
   idIterator: null,
@@ -67,7 +56,6 @@ const app = {
 
   parseTaskToReload: function(objTask) {
     let result = Object.values(objTask);
-    // resultSorted = this.orderbyTaskTitleDesc(result);
     this.reloadListTask(result);
   },
 
@@ -120,7 +108,6 @@ const app = {
 
   getSelectedValue: function() {
     var selectedValue = document.getElementById("select_id").value;
-    console.log(selectedValue);
     if (selectedValue == "Title-Asc") { this.orderbyTaskTitleAsc(); }
     if (selectedValue == "Title-Desc") { this.orderbyTaskTitleDesc(); }
     if (selectedValue == "Due-Date-Asc") { this.orderbyDueDateAsc(); }
@@ -144,28 +131,24 @@ const app = {
   orderbyDueDateAsc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compareDateAsc);
-    console.log(arraySorted)
     this.reloadListTask(arraySorted);
   },
 
   orderbyDueDateDesc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compareDateDesc);
-    console.log(arraySorted)
     this.reloadListTask(arraySorted);
   },
 
   orderbyCreateDateAsc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compareCreateDateAsc);
-    console.log(arraySorted)
     this.reloadListTask(arraySorted);
   },
 
   orderbyCreateDateDesc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compareCreateDateDesc);
-    console.log(arraySorted)
     this.reloadListTask(arraySorted);
   },
 
