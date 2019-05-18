@@ -4,11 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UfA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>EverClose</title>
+    <link rel="stylesheet" href="component-float-button.css" />
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+
+    <div class="none">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="arrow-down" viewBox="0 0 12 12">
+          <path d="M1.29292 5.12981C1.68345 4.73928 2.31661 4.73928 2.70714 5.12981L6.08151 8.50418L9.45589 5.12981C9.84641 4.73928 10.4796 4.73928 10.8701 5.12981C11.2606 5.52033 11.2606 6.1535 10.8701 6.54402L6.78862 10.6255C6.39809 11.016 5.76493 11.016 5.3744 10.6255L1.29292 6.54402C0.902398 6.1535 0.902398 5.52033 1.29292 5.12981Z"/>
+        </symbol>
+        <symbol id="check" viewBox="0 0 15 12">
+          <path d="M14.1595 2.08241L5.36545 11.2022L0 5.63796L2.15954 3.55556L5.36546 6.88024L12 0L14.1595 2.08241Z"/>
+        </symbol>
+        <symbol id="heart" viewBox="0 0 20 18">
+          <path d="M9.94 3.17974C10.7472 1.30813 12.5912 0.000391276 14.736 0.000391276C17.6252 0.000391276 19.706 2.41826 19.9676 5.29983C19.9676 5.29983 20.1088 6.01513 19.798 7.30291C19.3748 9.05674 18.38 10.6149 17.0388 11.8041L9.94 18L2.9608 11.8037C1.6196 10.6149 0.624801 9.05635 0.201601 7.30252C-0.109199 6.01474 0.0320009 5.29943 0.0320009 5.29943C0.293601 2.41787 2.3744 0 5.2636 0C7.4088 0 9.1328 1.30813 9.94 3.17974Z"/>
+        </symbol>
+        <symbol id="plus" viewBox="0 0 16 16">
+          <path d="M9.49098 6.41509H16V9.0566H9.49098V16H6.50902V9.0566H0L0 6.41509H6.50902V0L9.49098 0V6.41509Z"/>
+        </symbol>
+      </svg>
+    </div>
+
     <main class="main-container">
       <form action="" class="form-todo" id="task-form">
         <input type="text" placeholder="Insert Task" id="title-task" />
@@ -29,6 +48,16 @@
         </div>
         <ul id="js-task-list" class="task-body"></ul>
       </div>
+      <div class="button-float -solid"></div>
+      <div class="button-float -ghost"></div>
+
+      <div>
+        <svg width="12" height="12"><use xlink:href="#arrow-down"></svg>
+        <svg width="15" height="12"><use xlink:href="#check"></svg>
+        <svg width="20" height="18"><use xlink:href="#heart"></svg>
+        <svg width="16" height="16"><use xlink:href="#plus"></svg>
+      </div>
+
     </main>
     <script src="script.js"></script>
   </body>
