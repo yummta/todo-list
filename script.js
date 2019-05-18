@@ -8,8 +8,8 @@
 //   tasks[i].add-EventListener("click", changeState )
 // }
 
-const fakeTask = [
-  {
+const fakeTask = {
+  1: {
     id: 1,
     title: "Buy food",
     dueDate: "18/12/2019",
@@ -17,7 +17,7 @@ const fakeTask = [
     priority: false,
     resolved: false
   },
-  {
+  2: {
     id: 2,
     title: "Eat food",
     dueDate: "18/11/2019",
@@ -25,7 +25,7 @@ const fakeTask = [
     priority: false,
     resolved: true
   },
-  {
+  3: {
     id: 3,
     title: "Clean food",
     dueDate: "25/12/2019",
@@ -33,7 +33,8 @@ const fakeTask = [
     priority: false,
     resolved: false
   }
-];
+};
+
 
 const app = {
   idIterator: null,
@@ -66,8 +67,8 @@ const app = {
 
   parseTaskToReload: function(objTask) {
     let result = Object.values(objTask);
-    resultSorted = this.orderbyTaskTitleDesc(result);
-    this.reloadListTask(resultSorted);
+    // resultSorted = this.orderbyTaskTitleDesc(result);
+    this.reloadListTask(result);
   },
 
   reloadListTask: function(arrayTask) {
@@ -92,10 +93,17 @@ const app = {
     return 0;
   },
 
-  orderbyTaskTitleDesc: function(arrayTask) {
-    const arraySorted = arrayTask.sort(this.compare);
-    return arraySorted;
+  getSelectedValue: function() {
+    var selectedValue = document.getElementById("select_id").value;
+    console.log(selectedValue);
   },
+
+  orderbyTaskTitleAsc: function() {
+    let arrayTask = Object.values(this.tasks);
+    const arraySorted = arrayTask.sort(this.compare);
+    this.reloadListTask(arraySorted);
+  },
+
 
   idGenerator: function*() {
     let id = 1;
