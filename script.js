@@ -1,29 +1,8 @@
-const fakeTask = {
-  1: {
-    id: 1,
-    title: "Buy food",
-    dueDate: "18/12/2019",
-    createDate: "18/12/2018",
-    priority: false,
-    resolved: false
-  },
-  2: {
-    id: 2,
-    title: "Eat food",
-    dueDate: "18/11/2019",
-    createDate: "18/12/2018",
-    priority: false,
-    resolved: true
-  },
-  3: {
-    id: 3,
-    title: "Clean food",
-    dueDate: "25/12/2019",
-    createDate: "18/12/2018",
-    priority: false,
-    resolved: false
-  }
-};
+// li template
+//<li class="task-item" data-idTask="1">
+//  <span class="title">title</span>
+//  <pre class="date">date</pre>
+//</li>
 
 const app = {
   idIterator: null,
@@ -43,33 +22,56 @@ const app = {
     this.parseTaskToReload(this.tasks);
   },
 
+  addEventToTasks: function(){
+    const tasks = document.getElementsByClassName("task-item")
+    for( let i = 0; i < tasks.length; i++){
+      tasks[i].addEventListener("click", this.changeState )
+    }
+  },
+
+  changeState: function() {
+    const idCurrentTask = this.dataset.idtask
+    app.tasks[idCurrentTask].resolved = !app.tasks[idCurrentTask].resolved
+    app.parseTaskToReload(app.tasks)
+  },
+
   sendNewTask: function() {
     event.preventDefault();
-    let titleTask = document.getElementById("title-task").value;
-    let dueDateTask = document.getElementById("due-date-task").value;
+    const $inputTitle = document.getElementById("title-task")
+    const $inputDate = document.getElementById("due-date-task")
     let dataTask = {
-      title: titleTask,
-      dueDate: dueDateTask
+      title: $inputTitle.value,
+      dueDate: $inputDate.value
     };
     app.addTask(dataTask);
+    $inputTitle.value = ""
+    $inputDate.value = ""
   },
 
   parseTaskToReload: function(objTask) {
     let result = Object.values(objTask);
-    this.reloadListTask(result);
+    app.reloadListTask(result);
   },
 
   reloadListTask: function(arrayTask) {
     const $taskList = document.getElementById("js-task-list");
     let htmlTasks = "";
     arrayTask.forEach(function(val) {
-      htmlTasks += `<li class="task-item ${val.resolved ? "active" : ""}"> 
-      ${val.title}, ${val.dueDate}, ${val.createDate} </li>`;
+      htmlTasks += `
+        <li
+          class="task-item ${val.resolved ? "active" : ""}"
+          data-idTask="${val.id}"
+        >
+          <span class="title">${val.title}</span>
+          <span class="date">${val.dueDate}</span>
+        </li>
+      `;
     });
+
     $taskList.innerHTML = htmlTasks;
+    app.addEventToTasks()
   },
 
-  toggleState: function() {},
   compare: function(a,b) {
     if (a.title < b.title){
       return -1;
