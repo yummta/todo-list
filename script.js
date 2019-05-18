@@ -18,7 +18,8 @@ const app = {
       priority: false,
       resolved: false
     };
-    this.parseTaskToReload(this.tasks);
+    // this.parseTaskToReload(this.tasks);
+    app.getSelectedValue();
   },
 
   addEventToTasks: function() {
@@ -31,11 +32,7 @@ const app = {
   changeState: function() {
     const idCurrentTask = this.dataset.idtask;
     app.tasks[idCurrentTask].resolved = !app.tasks[idCurrentTask].resolved;
-    if (app.lastSort.length) {
-      app.reloadListTask(app.lastSort);
-    } else {
-      app.parseTaskToReload(app.tasks);
-    }
+    app.getSelectedValue();
   },
 
   sendNewTask: function() {
@@ -58,12 +55,6 @@ const app = {
       $inputDate.value = "";
     }
   },
-
-  parseTaskToReload: function(objTask) {
-    let result = Object.values(objTask);
-    app.reloadListTask(result);
-  },
-
   reloadListTask: function(arrayTask) {
     const $taskList = document.getElementById("js-task-list");
     let htmlTasks = "";
@@ -119,8 +110,14 @@ const app = {
     return new Date(b.createDate) - new Date(a.createDate);
   },
 
+  compareIdDesc: function(a, b) {
+    return b.id - a.id;
+  },
+
   getSelectedValue: function() {
     var selectedValue = document.getElementById("select_id").value;
+    console.log("estoy aqui");
+    console.log(selectedValue);
     if (selectedValue == "Title-Asc") {
       this.orderbyTaskTitleAsc();
     }
@@ -139,6 +136,16 @@ const app = {
     if (selectedValue == "Creation-Date-Desc") {
       this.orderbyCreateDateDesc();
     }
+    if (selectedValue == "Order by") {
+      this.orderbyTaskIdDesc();
+    }
+  },
+
+  orderbyTaskIdDesc: function() {
+    let arrayTask = Object.values(this.tasks);
+    const arraySorted = arrayTask.sort(this.compareIdDesc);
+    this.lastSort = arraySorted;
+    this.reloadListTask(arraySorted);
   },
 
   orderbyTaskTitleAsc: function() {
