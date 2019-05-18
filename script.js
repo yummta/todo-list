@@ -1,12 +1,47 @@
-// li template
-//<li class="task-item" data-idTask="1">
-//  <span class="title">title</span>
-//  <pre class="date">date</pr
-//</li>
+/* <li class="task-item" data-idtask="1">
+<div class="info">
+  <div class="check">
+      <svg width="15" height="12"><use xlink:href="#check"></svg>
+  </div>
+  <div class="task-detail ">
+    <p class="title">comprar frutos secos, frutas nona  noa naturales,chocolates y dulces</p>
+    <p class="date">2019-05-02</p>
+  </div>
+</div>
+<div class="heart">
+    <svg width="20" height="18"><use xlink:href="#heart"></svg>
+</div>
+</li> */
+
 
 const app = {
   idIterator: null,
-  tasks: {},
+  tasks: {
+    91: {
+      id: 91,
+      title: "Buy food",
+      dueDate: "18/12/2019",
+      createDate: "18/12/2018",
+      priority: false,
+      resolved: false
+    },
+    92: {
+      id: 92,
+      title: "Eat food",
+      dueDate: "18/11/2019",
+      createDate: "18/12/2018",
+      priority: false,
+      resolved: true
+    },
+    93: {
+      id: 93,
+      title: "Clean food",
+      dueDate: "25/12/2019",
+      createDate: "18/12/2018",
+      priority: false,
+      resolved: false
+    }
+  },
   lastSort: [],
   addTask: function(task) {
     let idTask = this.idIterator.next().value;
@@ -60,13 +95,20 @@ const app = {
     let htmlTasks = "";
     arrayTask.forEach(function(val) {
       htmlTasks += `
-        <li
-          class="task-item ${val.resolved ? "active" : ""}"
-          data-idTask="${val.id}"
-        >
-          <span class="title">${val.title}</span>
-          <span class="date">${val.dueDate}</span>
-        </li>
+        <li class="task-item ${val.resolved ? "active" : ""}" data-idTask="${val.id}">
+        <div class="info">
+          <div class="check">
+            <svg width="15" height="12"><use xlink:href="#check"></svg>
+          </div>
+          <div class="task-detail ">
+            <p class="title">${val.title}</p>
+            <p class="date">${val.dueDate}</p>
+          </div>
+        </div>
+        <div class="heart">
+          <svg width="20" height="18"><use xlink:href="#heart"></svg>
+        </div>
+      </li>
       `;
     });
 
@@ -116,8 +158,6 @@ const app = {
 
   getSelectedValue: function() {
     var selectedValue = document.getElementById("select_id").value;
-    console.log("estoy aqui");
-    console.log(selectedValue);
     if (selectedValue == "Title-Asc") {
       this.orderbyTaskTitleAsc();
     }
@@ -202,6 +242,7 @@ const app = {
     this.idIterator = this.idGenerator();
     const $buttonSave = document.getElementById("send-new-task");
     $buttonSave.addEventListener("click", app.sendNewTask);
+    app.getSelectedValue()
   }
 };
 
