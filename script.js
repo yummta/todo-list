@@ -1,3 +1,4 @@
+
 // li template
 //<li class="task-item" data-idTask="1">
 //  <span class="title">title</span>
@@ -6,9 +7,8 @@
 
 const app = {
   idIterator: null,
-
   tasks: {},
-
+  lastSort: [],
   addTask: function(task) {
     let idTask = this.idIterator.next().value;
     this.tasks[idTask] = {
@@ -32,20 +32,29 @@ const app = {
   changeState: function() {
     const idCurrentTask = this.dataset.idtask
     app.tasks[idCurrentTask].resolved = !app.tasks[idCurrentTask].resolved
-    app.parseTaskToReload(app.tasks)
+    app.reloadListTask(app.lastSort)
   },
 
   sendNewTask: function() {
     event.preventDefault();
     const $inputTitle = document.getElementById("title-task")
     const $inputDate = document.getElementById("due-date-task")
-    let dataTask = {
-      title: $inputTitle.value,
-      dueDate: $inputDate.value
-    };
-    app.addTask(dataTask);
-    $inputTitle.value = ""
-    $inputDate.value = ""
+    if ($inputTitle.value === ""){
+      alert("Please enter a valid task 👀");
+      $inputTitle.focus();
+    } else if($inputDate.value === "") {
+      alert("Please enter a valid date 👀");
+      $inputDate.focus();
+    } else {
+      let dataTask = {
+        title: $inputTitle.value,
+        dueDate: $inputDate.value
+      };
+      app.addTask(dataTask);
+      $inputTitle.value = ""
+      $inputDate.value = ""
+    }
+    
   },
 
   parseTaskToReload: function(objTask) {
@@ -121,36 +130,42 @@ const app = {
   orderbyTaskTitleAsc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compare);
+    this.lastSort = arraySorted
     this.reloadListTask(arraySorted);
   },
 
   orderbyTaskTitleDesc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compareDesc);
+    this.lastSort = arraySorted
     this.reloadListTask(arraySorted);
   },
 
   orderbyDueDateAsc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compareDateAsc);
+    this.lastSort = arraySorted
     this.reloadListTask(arraySorted);
   },
 
   orderbyDueDateDesc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compareDateDesc);
+    this.lastSort = arraySorted
     this.reloadListTask(arraySorted);
   },
 
   orderbyCreateDateAsc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compareCreateDateAsc);
+    this.lastSort = arraySorted
     this.reloadListTask(arraySorted);
   },
 
   orderbyCreateDateDesc: function() {
     let arrayTask = Object.values(this.tasks);
     const arraySorted = arrayTask.sort(this.compareCreateDateDesc);
+    this.lastSort = arraySorted
     this.reloadListTask(arraySorted);
   },
 
