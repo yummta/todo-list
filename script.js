@@ -58,7 +58,7 @@ const app = {
   },
 
   addEventToTasks: function() {
-    const tasks = document.getElementsByClassName("task-item");
+    const tasks = document.getElementsByClassName("js-toggle-resolve");
     for (let i = 0; i < tasks.length; i++) {
       tasks[i].addEventListener("click", this.changeState);
     }
@@ -95,10 +95,8 @@ const app = {
     let htmlTasks = "";
     arrayTask.forEach(function(val) {
       htmlTasks += `
-        <li class="task-item ${val.resolved ? "active" : ""}" data-idTask="${
-        val.id
-      }">
-        <div class="info">
+        <li class="task-item ${val.resolved ? "active" : ""}" >
+        <div class="info js-toggle-resolve" data-idTask="${val.id}">
           <div class="check">
             <svg width="15" height="12"><use xlink:href="#check"></svg>
           </div>
@@ -118,7 +116,36 @@ const app = {
     app.addEventToTasks();
   },
 
+  getSelectedValue: function() {
+    let arrayTask = Object.values(this.tasks);
+    var selectedValue = document.getElementById("select_id").value;
+    var arraySorted = [];
+    if (selectedValue == "Title-Asc") {
+      arraySorted = arrayTask.sort(this.compare);
+    }
+    if (selectedValue == "Title-Desc") {
+      arraySorted = arrayTask.sort(this.compareDesc);
+    }
+    if (selectedValue == "Due-Date-Asc") {
+      arraySorted = arrayTask.sort(this.compareDateAsc);
+    }
+    if (selectedValue == "Due-Date-Desc") {
+      arraySorted = arrayTask.sort(this.compareDateDesc);
+    }
+    if (selectedValue == "Creation-Date-Asc") {
+      arraySorted = arrayTask.sort(this.compareCreateDateAsc);
+    }
+    if (selectedValue == "Creation-Date-Desc") {
+      arraySorted = arrayTask.sort(this.compareCreateDateDesc);
+    }
+    if (selectedValue == "Order by") {
+      arraySorted = arrayTask.sort(this.compareIdDesc);
+    }
+    this.reloadListTask(arraySorted);
+  },
   compare: function(a, b) {
+    console.log(a);
+    console.log(b);
     if (a.title < b.title) {
       return -1;
     }
@@ -156,76 +183,6 @@ const app = {
 
   compareIdDesc: function(a, b) {
     return b.id - a.id;
-  },
-
-  getSelectedValue: function() {
-    var arraySorted = [];
-    let arrayTask = Object.values(this.tasks);
-    var selectedValue = document.getElementById("select_id").value;
-    if (selectedValue == "Title-Asc") {
-      arraySorted = this.orderbyTaskTitleAsc(arrayTask);
-    }
-    if (selectedValue == "Title-Desc") {
-      arraySorted = this.orderbyTaskTitleDesc(arrayTask);
-    }
-    if (selectedValue == "Due-Date-Asc") {
-      arraySorted = this.orderbyDueDateAsc(arrayTask);
-    }
-    if (selectedValue == "Due-Date-Desc") {
-      arraySorted = this.orderbyDueDateDesc(arrayTask);
-    }
-    if (selectedValue == "Creation-Date-Asc") {
-      arraySorted = this.orderbyCreateDateAsc(arrayTask);
-    }
-    if (selectedValue == "Creation-Date-Desc") {
-      arraySorted = this.orderbyCreateDateDesc(arrayTask);
-    }
-    if (selectedValue == "Order by") {
-      arraySorted = this.orderbyTaskIdDesc(arrayTask);
-    }
-    this.reloadListTask(arraySorted);
-  },
-
-  orderbyTaskIdDesc: function(arrayTask) {
-    //const arraySorted = arrayTask.sort(this.compareIdDesc);
-    return arrayTask.sort(this.compareIdDesc);
-    // this.reloadListTask(arraySorted);
-  },
-
-  orderbyTaskTitleAsc: function(arrayTask) {
-    //const arraySorted = arrayTask.sort(this.compare);
-    return arrayTask.sort(this.compare);
-    // this.reloadListTask(arraySorted);
-  },
-
-  orderbyTaskTitleDesc: function(arrayTask) {
-    //const arraySorted = arrayTask.sort(this.compareDesc);
-    return arrayTask.sort(this.compareDesc);
-    // this.reloadListTask(arraySorted);
-  },
-
-  orderbyDueDateAsc: function(arrayTask) {
-    //const arraySorted = arrayTask.sort(this.compareDateAsc);
-    return arrayTask.sort(this.compareDateAsc);
-    // this.reloadListTask(arraySorted);
-  },
-
-  orderbyDueDateDesc: function(arrayTask) {
-    //const arraySorted = arrayTask.sort(this.compareDateDesc);
-    return arrayTask.sort(this.compareDateDesc);
-    // this.reloadListTask(arraySorted);
-  },
-
-  orderbyCreateDateAsc: function(arrayTask) {
-    //const arraySorted = arrayTask.sort(this.compareCreateDateAsc);
-    return arrayTask.sort(this.compareCreateDateAsc);
-    // this.reloadListTask(arraySorted);
-  },
-
-  orderbyCreateDateDesc: function(arrayTask) {
-    //const arraySorted = arrayTask.sort(this.compareCreateDateDesc);
-    return arrayTask.sort(this.compareCreateDateDesc);
-    // this.reloadListTask(arraySorted);
   },
 
   idGenerator: function*() {
