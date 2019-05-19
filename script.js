@@ -70,6 +70,12 @@ const app = {
     app.getSelectedValue();
   },
 
+  changePriority: function() {
+    const idCurrentTask = this.dataset.idTaskHeart;
+    app.tasks[idCurrentTask].priority = !app.tasks[idCurrentTask].priority;
+    app.getSelectedValue();
+  },
+
   sendNewTask: function() {
     event.preventDefault();
     const $inputTitle = document.getElementById("title-task");
@@ -105,7 +111,9 @@ const app = {
             <p class="date">${val.dueDate}</p>
           </div>
         </div>
-        <div class="heart">
+        <div class="heart ${val.priority ? "active" : ""}" data-idTaskHeart="${
+        val.id
+      }">
           <svg width="20" height="18"><use xlink:href="#heart"></svg>
         </div>
       </li>
