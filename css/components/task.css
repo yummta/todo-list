@@ -21,20 +21,20 @@
   right: 0;
 }
 
-.c-task-item.-active .heart svg{
-  fill: var(--c-alert)
-}
-
-.c-task-item.-active .check{
+.c-task-item.-resolved .check{
   border: solid 1px var(--c-primary);
 }
 
-.c-task-item.-active .check svg{
+.c-task-item.-resolved .check svg{
   fill: var(--c-primary);
 }
 
-.c-task-item.-active .title{
+.c-task-item.-resolved .title{
   text-decoration: line-through;
+}
+
+.c-task-item.-prioritized .heart svg{
+  fill: var(--c-alert)
 }
 
 .c-task-item .task-detail {
@@ -78,9 +78,9 @@
 
 .c-task-item .heart svg {
   fill: var(--c-gray);
-  /* fill: var(--c-alert); */
 }
 
 .c-task-item .info {
   display: flex;
+  flex-grow: 1;
 }

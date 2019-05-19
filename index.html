@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UfA-Compatible" content="ie=edge" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="component-buttons.css" />
-    <link rel="stylesheet" href="component-header.css" />
-    <link rel="stylesheet" href="component-form.css" />
-    <link rel="stylesheet" href="component-float-button.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="stylesheet" href="component-task.css" />
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components/buttons.css" />
+    <link rel="stylesheet" href="css/components/header.css" />
+    <link rel="stylesheet" href="css/components/form.css" />
+    <link rel="stylesheet" href="css/components/float-button.css" />
+    <link rel="stylesheet" href="css/components/task.css" />
+    <link rel="stylesheet" href="css/shame.css" />
     <title>EverClose</title>
   </head>
   <body>
@@ -43,14 +43,22 @@
         <div class="task-list">
           <div class="task-header">
             <div class="select center">
+              <select class="terminator-shape -ghost" name="" id="js-select-filter">
+                <option value="all" selected="true">See all</option>
+                <option value="prioritized">Priority</option>
+                <option value="pending">Pending</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </div>
+            <div class="select center">
               <select class="terminator-shape -ghost" onchange="app.getSelectedValue()" name="" id="select_id">
                 <option selected="true" disabled="disabled">Order by</option>
-                <option value="Title-Asc">title asc</option>
-                <option value="Title-Desc">title desc</option>
-                <option value="Due-Date-Asc">due date asc</option>
-                <option value="Due-Date-Desc">due date desc</option>
-                <option value="Creation-Date-Asc">creation date asc</option>
-                <option value="Creation-Date-Desc">creation date desc</option>
+                <option value="Title-Asc">AZ ↑</option>
+                <option value="Title-Desc">AZ ↓</option>
+                <option value="Due-Date-Asc">Due date ↑</option>
+                <option value="Due-Date-Desc">Due date ↓</option>
+                <option value="Creation-Date-Asc">Creation date ↑</option>
+                <option value="Creation-Date-Desc">Creation date ↓</option>
               </select>
             </div>
           </div>
