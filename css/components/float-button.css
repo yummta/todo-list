@@ -4,7 +4,6 @@
   align-items: center;
   pointer-events: none;
   opacity: 0;
-  transition: all 0.25s;
 }
 
 .c-float-button.-active{
@@ -12,6 +11,20 @@
   opacity: 1;
 }
 
+.c-float-button.-hide .button-float{
+  transform: rotate(-45deg);
+}
+.c-float-button.-show .button-float{
+  transform: rotate(-45deg);
+}
+
+.c-float-button.-show.-active .button-float{
+  transform: rotate(0deg);
+}
+
+.c-float-button.-hide.-active .button-float{
+  transform: rotate(0deg);
+}
 
 .c-float-button .label{
   color: var(--c-gray-text);
@@ -29,6 +42,7 @@
   align-items: center;
   cursor: pointer;
   margin-bottom: 8px;
+  transition: all 0.25s;
 }
 
 .c-float-button .button-float.-solid {
