@@ -21,3 +21,8 @@ This is a Todo List Aplication, this aplication let you:
 npm install -g live-server
 2- run live-server with the following command:
 live-server
+
+## Design
+
+![](img/design.png)
+
