@@ -1,12 +1,5 @@
 # EverClose
 
-## Team Members
-
-- Marieth Perez
-- Paul Portillo
-- Deyvi Conde
-- Christopher Roa
-
 ## What Is This?
 
 This is a Todo List Aplication, this aplication let you:
@@ -15,12 +8,24 @@ This is a Todo List Aplication, this aplication let you:
 - All the task shall to be show listed.
 - The user could check a task when it will be finished.
 
+## Team Members
+
+- Marieth Perez
+- Paul Portillo
+- Deyvi Conde
+- Christopher Roa
+
 ## How To Install
 
-1- Install live-server with the following command:
+ 1. Install live-server with the following command:
+ ```
 npm install -g live-server
-2- run live-server with the following command:
+```
+
+2. run live-server with the following command:
+```
 live-server
+```
 
 ## Design
 
