@@ -1,4 +1,4 @@
-/* <li class="task-item" data-idtask="1">
+/* <li class="c-task-item task-item" data-idtask="1">
 <div class="info">
   <div class="check">
       <svg width="15" height="12"><use xlink:href="#check"></svg>
@@ -13,7 +13,7 @@
 </div>
 </li> */
 
-a = {
+const fakeData = {
   91: {
     id: 91,
     title: "Buy food",
@@ -37,8 +37,73 @@ a = {
     createDate: "18/12/2018",
     priority: false,
     resolved: false
+  },
+  41: {
+    id: 41,
+    title: "Buy food",
+    dueDate: "18/12/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: false
+  },
+  42: {
+    id: 42,
+    title: "Eat food",
+    dueDate: "18/11/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: true
+  },
+  43: {
+    id: 43,
+    title: "Clean food",
+    dueDate: "25/12/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: false
+  },
+  191: {
+    id: 191,
+    title: "Buy food",
+    dueDate: "18/12/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: false
+  },
+  192: {
+    id: 192,
+    title: "Eat food",
+    dueDate: "18/11/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: true
+  },
+  193: {
+    id: 193,
+    title: "Clean food",
+    dueDate: "25/12/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: false
+  },
+  141: {
+    id: 141,
+    title: "Buy food",
+    dueDate: "18/12/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: false
+  },
+  142: {
+    id: 142,
+    title: "Eat food",
+    dueDate: "18/11/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: true
   }
-};
+}
+
 
 const app = {
   idIterator: null,
@@ -101,7 +166,7 @@ const app = {
     let htmlTasks = "";
     arrayTask.forEach(function(val) {
       htmlTasks += `
-        <li class="task-item ${val.resolved ? "active" : ""}" >
+        <li class="c-task-item task-item ${val.resolved ? "active" : ""}" >
         <div class="info js-toggle-resolve" data-idTask="${val.id}">
           <div class="check">
             <svg width="15" height="12"><use xlink:href="#check"></svg>
@@ -209,4 +274,45 @@ const app = {
   }
 };
 
+
+const manageDom = function() {
+  let dom, fn, catchDom, addEvents, init
+  dom = {}
+  fn = {}
+
+  catchDom = function(){
+    dom.buttonShowForm = document.getElementById("js-button-show-form")
+    dom.buttonHideForm = document.getElementById("js-button-hide-form")
+    dom.blockForm = document.getElementById("js-block-form")
+    dom.buttonSendNewTask = document.getElementById("send-new-task")
+  }
+
+  addEvents = function(){
+    dom.buttonShowForm.addEventListener("click", fn.showForm)
+    dom.buttonHideForm.addEventListener("click", fn.hideForm)
+    dom.buttonSendNewTask.addEventListener("click", fn.hideForm)
+  }
+
+  fn.showForm = function () {
+    dom.blockForm.classList.add("-active")
+    dom.buttonShowForm.classList.remove("-active")
+    dom.buttonHideForm.classList.add("-active")
+  }
+
+  fn.hideForm = function () {
+    dom.blockForm.classList.remove("-active")
+    dom.buttonShowForm.classList.add("-active")
+    dom.buttonHideForm.classList.remove("-active")
+  }
+
+  init = function() {
+    catchDom()
+    addEvents()
+    console.log("[run... manageDom]")
+  }
+
+  return init()
+}
+
+manageDom();
 app.run();

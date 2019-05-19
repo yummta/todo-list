@@ -33,54 +33,63 @@
       </svg>
     </div>
 
-    <header class="c-header">
-      <span class="logo">EverClose</span>
-    </header>
+    <div class="wrapp-app">
 
-    <main class="main-container">
-      <div class="task-list">
-        <div class="task-header">
-          <div class="select center">
-            <select class="terminator-shape -ghost" onchange="app.getSelectedValue()" name="" id="select_id">
-              <option selected="true" disabled="disabled">Order by</option>
-              <option value="Title-Asc">title asc</option>
-              <option value="Title-Desc">title desc</option>
-              <option value="Due-Date-Asc">due date asc</option>
-              <option value="Due-Date-Desc">due date desc</option>
-              <option value="Creation-Date-Asc">creation date asc</option>
-              <option value="Creation-Date-Desc">creation date desc</option>
-            </select>
+      <header class="c-header">
+        <span class="logo">EverClose</span>
+      </header>
+
+      <main class="main-container">
+        <div class="task-list">
+          <div class="task-header">
+            <div class="select center">
+              <select class="terminator-shape -ghost" onchange="app.getSelectedValue()" name="" id="select_id">
+                <option selected="true" disabled="disabled">Order by</option>
+                <option value="Title-Asc">title asc</option>
+                <option value="Title-Desc">title desc</option>
+                <option value="Due-Date-Asc">due date asc</option>
+                <option value="Due-Date-Desc">due date desc</option>
+                <option value="Creation-Date-Asc">creation date asc</option>
+                <option value="Creation-Date-Desc">creation date desc</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-list-tasks">
+            <ul id="js-task-list" class="task-body"></ul>
           </div>
         </div>
 
-        <ul id="js-task-list" class="task-body"></ul>
-      </div>
+        <div id="js-block-form" class="c-form shadow-card -active">
+          <h2 class="title">New awesom task</h2>
+          <form action="" class="form-add" id="task-form">
+            <div class="inputs-block">
+              <input class="input terminator-shape" type="text" placeholder="Type your task" id="title-task" required />
+              <input class="input terminator-shape" type="date" id="due-date-task" required/>
+            </div>
+            <input class="terminator-shape -solid" id="send-new-task" type="submit" value="Add Task" />
+          </form>
+        </div>
 
-      <div class="c-form shadow-card">
-        <h2 class="title">New awesom task</h2>
-        <form action="" class="form-add" id="task-form">
-          <div class="inputs-block">
-            <input class="input terminator-shape" type="text" placeholder="Type your task" id="title-task" required />
-            <input class="input terminator-shape" type="date" id="due-date-task" required/>
+        <div class="toggle-form">
+          <div id="js-button-show-form" class="c-float-button -show">
+            <div class="button-float -solid">
+              <svg width="16" height="16"><use xlink:href="#plus"></svg>
+            </div>
+            <label class="label">Add new task</label>
           </div>
-          <input class="terminator-shape -solid" id="send-new-task" type="submit" value="Add Task" />
-        </form>
-      </div>
 
-      <div class="c-float-button ">
-        <div class="button-float -solid">
-          <svg width="16" height="16"><use xlink:href="#plus"></svg>
+          <div id="js-button-hide-form" class="c-float-button -hide -active">
+            <div class="button-float -ghost">
+              <svg width="16" height="16"><use xlink:href="#plus"></svg>
+            </div>
+            <label class="label">Close</label>
+          </div>
         </div>
-        <label class="label">Add new task</label>
-      </div>
 
-      <div class="c-float-button none">
-        <div class="button-float -ghost">
-          <svg width="16" height="16"><use xlink:href="#plus"></svg>
-        </div>
-        <label class="label">Cancel</label>
-      </div>
-    </main>
+      </main>
+
+    </div>
 
     <script src="script.js"></script>
   </body>

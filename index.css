@@ -22,3 +22,39 @@
   pointer-events: none;
   width: 48px;
 }
+
+.toggle-form{
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 30%, rgba(255,255,255,0) 100%);  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 88px;
+}
+
+.toggle-form .c-float-button{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 100px;
+}
+
+.task-body{
+  height: calc(100vh - 125px);
+  overflow: auto;
+}
+
+.task-body:after{
+  content: "";
+  display: block;
+  height: 100px;
+  background-color: #fff;
+}
+
+.wrap-list-tasks{
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  background-color: #fff;
+}
