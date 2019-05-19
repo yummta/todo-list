@@ -29,5 +29,5 @@ live-server
 
 ## Design
 
-![](img/design.png)
+![](img/design.jpg)
 
