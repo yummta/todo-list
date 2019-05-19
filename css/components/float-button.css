@@ -2,12 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
-  bottom: 40px;
-  left: 0;
-  right: 0;
-  margin: auto;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.25s;
 }
+
+.c-float-button.-active{
+  pointer-events: initial;
+  opacity: 1;
+}
+
 
 .c-float-button .label{
   color: var(--c-gray-text);
@@ -31,6 +35,7 @@
   border-color: var(--c-primary);
   background-color: var(--c-primary);
 }
+
 .c-float-button .button-float.-solid svg{
   fill: white
 }
@@ -39,6 +44,7 @@
   border-color: var(--c-primary);
   background-color: var(--color-white);
 }
+
 .c-float-button .button-float.-ghost svg {
   fill: var(--c-primary);
   transform: rotate(45deg)

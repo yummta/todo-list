@@ -5,10 +5,14 @@
   --c-gray: #e1e1e1;
 }
 
+::selection {
+  background-color: var(--c-primary);
+  color: white;
+}
+
 /* Resets */
 
 body {
-  background-color: var(--c-primary);
   height: 100vh;
   margin: 0;
   overflow: hidden;

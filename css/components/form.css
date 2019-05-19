@@ -4,7 +4,17 @@
   position: relative;
   background-color: #fff;
   height: 100vh;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100vh;
+  transition: all 0.45s;
 }
+
+.c-form.-active{
+  top: 60px;
+}
+
 .c-form:after{
   content: "";
   position: absolute;
@@ -14,7 +24,6 @@
   left: 0;
   right: 0;
 }
-
 
 .c-form .title{
   font-size: 18px;
