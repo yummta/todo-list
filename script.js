@@ -13,36 +13,36 @@
 </div>
 </li> */
 
+a = {
+  91: {
+    id: 91,
+    title: "Buy food",
+    dueDate: "18/12/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: false
+  },
+  92: {
+    id: 92,
+    title: "Eat food",
+    dueDate: "18/11/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: true
+  },
+  93: {
+    id: 93,
+    title: "Clean food",
+    dueDate: "25/12/2019",
+    createDate: "18/12/2018",
+    priority: false,
+    resolved: false
+  }
+};
 
 const app = {
   idIterator: null,
-  tasks: {
-    91: {
-      id: 91,
-      title: "Buy food",
-      dueDate: "18/12/2019",
-      createDate: "18/12/2018",
-      priority: false,
-      resolved: false
-    },
-    92: {
-      id: 92,
-      title: "Eat food",
-      dueDate: "18/11/2019",
-      createDate: "18/12/2018",
-      priority: false,
-      resolved: true
-    },
-    93: {
-      id: 93,
-      title: "Clean food",
-      dueDate: "25/12/2019",
-      createDate: "18/12/2018",
-      priority: false,
-      resolved: false
-    }
-  },
-  lastSort: [],
+  tasks: {},
   addTask: function(task) {
     let idTask = this.idIterator.next().value;
     this.tasks[idTask] = {
@@ -58,7 +58,7 @@ const app = {
   },
 
   addEventToTasks: function() {
-    const tasks = document.getElementsByClassName("task-item");
+    const tasks = document.getElementsByClassName("js-toggle-resolve");
     for (let i = 0; i < tasks.length; i++) {
       tasks[i].addEventListener("click", this.changeState);
     }
@@ -67,6 +67,12 @@ const app = {
   changeState: function() {
     const idCurrentTask = this.dataset.idtask;
     app.tasks[idCurrentTask].resolved = !app.tasks[idCurrentTask].resolved;
+    app.getSelectedValue();
+  },
+
+  changePriority: function() {
+    const idCurrentTask = this.dataset.idTaskHeart;
+    app.tasks[idCurrentTask].priority = !app.tasks[idCurrentTask].priority;
     app.getSelectedValue();
   },
 
@@ -95,8 +101,8 @@ const app = {
     let htmlTasks = "";
     arrayTask.forEach(function(val) {
       htmlTasks += `
-        <li class="task-item ${val.resolved ? "active" : ""}" data-idTask="${val.id}">
-        <div class="info">
+        <li class="task-item ${val.resolved ? "active" : ""}" >
+        <div class="info js-toggle-resolve" data-idTask="${val.id}">
           <div class="check">
             <svg width="15" height="12"><use xlink:href="#check"></svg>
           </div>
@@ -105,7 +111,9 @@ const app = {
             <p class="date">${val.dueDate}</p>
           </div>
         </div>
-        <div class="heart">
+        <div class="heart ${val.priority ? "active" : ""}" data-idTaskHeart="${
+        val.id
+      }">
           <svg width="20" height="18"><use xlink:href="#heart"></svg>
         </div>
       </li>
@@ -116,7 +124,36 @@ const app = {
     app.addEventToTasks();
   },
 
+  getSelectedValue: function() {
+    let arrayTask = Object.values(this.tasks);
+    var selectedValue = document.getElementById("select_id").value;
+    var arraySorted = [];
+    if (selectedValue == "Title-Asc") {
+      arraySorted = arrayTask.sort(this.compare);
+    }
+    if (selectedValue == "Title-Desc") {
+      arraySorted = arrayTask.sort(this.compareDesc);
+    }
+    if (selectedValue == "Due-Date-Asc") {
+      arraySorted = arrayTask.sort(this.compareDateAsc);
+    }
+    if (selectedValue == "Due-Date-Desc") {
+      arraySorted = arrayTask.sort(this.compareDateDesc);
+    }
+    if (selectedValue == "Creation-Date-Asc") {
+      arraySorted = arrayTask.sort(this.compareCreateDateAsc);
+    }
+    if (selectedValue == "Creation-Date-Desc") {
+      arraySorted = arrayTask.sort(this.compareCreateDateDesc);
+    }
+    if (selectedValue == "Order by") {
+      arraySorted = arrayTask.sort(this.compareIdDesc);
+    }
+    this.reloadListTask(arraySorted);
+  },
   compare: function(a, b) {
+    console.log(a);
+    console.log(b);
     if (a.title < b.title) {
       return -1;
     }
@@ -156,80 +193,6 @@ const app = {
     return b.id - a.id;
   },
 
-  getSelectedValue: function() {
-    var selectedValue = document.getElementById("select_id").value;
-    if (selectedValue == "Title-Asc") {
-      this.orderbyTaskTitleAsc();
-    }
-    if (selectedValue == "Title-Desc") {
-      this.orderbyTaskTitleDesc();
-    }
-    if (selectedValue == "Due-Date-Asc") {
-      this.orderbyDueDateAsc();
-    }
-    if (selectedValue == "Due-Date-Desc") {
-      this.orderbyDueDateDesc();
-    }
-    if (selectedValue == "Creation-Date-Asc") {
-      this.orderbyCreateDateAsc();
-    }
-    if (selectedValue == "Creation-Date-Desc") {
-      this.orderbyCreateDateDesc();
-    }
-    if (selectedValue == "Order by") {
-      this.orderbyTaskIdDesc();
-    }
-  },
-
-  orderbyTaskIdDesc: function() {
-    let arrayTask = Object.values(this.tasks);
-    const arraySorted = arrayTask.sort(this.compareIdDesc);
-    this.lastSort = arraySorted;
-    this.reloadListTask(arraySorted);
-  },
-
-  orderbyTaskTitleAsc: function() {
-    let arrayTask = Object.values(this.tasks);
-    const arraySorted = arrayTask.sort(this.compare);
-    this.lastSort = arraySorted;
-    this.reloadListTask(arraySorted);
-  },
-
-  orderbyTaskTitleDesc: function() {
-    let arrayTask = Object.values(this.tasks);
-    const arraySorted = arrayTask.sort(this.compareDesc);
-    this.lastSort = arraySorted;
-    this.reloadListTask(arraySorted);
-  },
-
-  orderbyDueDateAsc: function() {
-    let arrayTask = Object.values(this.tasks);
-    const arraySorted = arrayTask.sort(this.compareDateAsc);
-    this.lastSort = arraySorted;
-    this.reloadListTask(arraySorted);
-  },
-
-  orderbyDueDateDesc: function() {
-    let arrayTask = Object.values(this.tasks);
-    const arraySorted = arrayTask.sort(this.compareDateDesc);
-    this.lastSort = arraySorted;
-    this.reloadListTask(arraySorted);
-  },
-
-  orderbyCreateDateAsc: function() {
-    let arrayTask = Object.values(this.tasks);
-    const arraySorted = arrayTask.sort(this.compareCreateDateAsc);
-    this.lastSort = arraySorted;
-    this.reloadListTask(arraySorted);
-  },
-
-  orderbyCreateDateDesc: function() {
-    let arrayTask = Object.values(this.tasks);
-    const arraySorted = arrayTask.sort(this.compareCreateDateDesc);
-    this.lastSort = arraySorted;
-    this.reloadListTask(arraySorted);
-  },
-
   idGenerator: function*() {
     let id = 1;
     while (true) {
@@ -242,7 +205,7 @@ const app = {
     this.idIterator = this.idGenerator();
     const $buttonSave = document.getElementById("send-new-task");
     $buttonSave.addEventListener("click", app.sendNewTask);
-    app.getSelectedValue()
+    app.getSelectedValue();
   }
 };
 
